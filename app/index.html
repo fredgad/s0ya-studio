@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css"> 
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script> -->
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>  -->
+
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/sketch.js"></script>
+    <script src="js/vehicle.js"></script>
+    <script src="js/script.js"></script>
+</head>
+<body class="body">
+<div id="wrapper">
+    <header>
+        <!-- <nav id="top-nav"> 
+            <div class="top-nav__first" @mouseenter="changeBotNavClass('first')">Создание сайтов</div>
+            <div class="top-nav__second" @mouseenter="changeBotNavClass('second')">продвижение сайтов</div>
+            <div class="top-nav__third" @mouseenter="changeBotNavClass('third')">Разработка мобильных приложений</div>
+            <div class="top-nav__fourth" @mouseenter="changeBotNavClass('fourth')">Дизайн</div>
+            <div class="top-nav__fifth" @mouseenter="changeBotNavClass('fifth')">печатная продукция</div>
+        </nav> -->
+        <nav id="top-nav"> 
+            <div class="top-nav__first" data-nav="first">Создание сайтов</div>
+            <div class="top-nav__second" data-nav="second">Продвижение сайтов</div>
+            <div class="top-nav__third" data-nav="third">Разработка мобильных приложений</div>
+            <div class="top-nav__fourth" data-nav="fourth">Дизайн</div>
+            <div class="top-nav__fifth" data-nav="fifth">Печатная продукция</div>
+        </nav>
+        <div id="bot-nav" class="first">
+            <div class="bot-nav__first">
+                <div class="limiter">
+                    <ul class="bot-nav__first_ul1">
+                        <img src="./images/banners/site4K.png" alt="">
+                    </ul>
+                    <ul class="bot-nav__first_ul2">
+                        <li>Разработка сайтов визиток</li>
+                        <li>Разработка ЛендингПейдж (LandingPage)</li>
+                        <li>Разработка Интернет-магазинов</li>
+                        <li>Разработка корпоративных сайтов</li>
+                        <li>Разработка порталов</li>
+                        <li>Техническая и информационная поддержка сайтов</li>
+                    </ul>
+                    <div class="bot-nav__first_work">
+                        <div>
+                            <p></p>
+                            <img src="./images/icons/phpmysql.png" alt="">
+                        </div>
+                        <div>
+                            <p></p>
+                            <img src="./images/icons/react_js.png" alt="">
+                        </div>
+                        <div>
+                            <p></p>
+                            <img src="./images/icons/site-another_CMS.png" alt="">
+                        </div>
+                        <div>
+                            <p></p>
+                            <img src="./images/icons/site-bitrix.png" alt="">
+                        </div>
+                        <div>
+                            <p></p>
+                            <img src="./images/icons/site-netcat.png" alt="">
+                        </div>
+                        <div>
+                            <p></p>
+                            <img src="./images/icons/site-opencart.png" alt="">
+                        </div>
+                        <div>
+                            <p></p>
+                            <img src="./images/icons/site-wordpress.png" alt="">
+                        </div>
+                        <div>
+                            <p></p>
+                            <img src="./images/icons/vue_js.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bot-nav__second">
+                <div class="bot-nav__second_head"></div>
+                
+                <div class="limiter">
+                    <div class="bot-nav__second_body">
+                        <ul class="bot-nav__second_body_ul1">
+                            <li>Some text</li>
+                            <li>Some text</li>
+                            <li>Some text</li>
+                        </ul>
+                        <ul class="bot-nav__second_body_ul2">
+                            <li>Some text</li>
+                            <li>Some text</li>
+                            <li>Some text</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bot-nav__third">
+                <div class="limiter">
+                    <ul class="bot-nav__third_limitee_1">
+                        <li>Some text</li>
+                        <li>Some text</li>
+                        <li>Some text</li>
+                    </ul>
+                    <ul class="bot-nav__third_limiter_2">
+                        <li>Some text</li>
+                        <li>Some text</li>
+                        <li>Some text</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bot-nav__fourth">
+                <div class="bot-nav__fourth_head"></div>
+                
+                <div class="limiter">
+                    <ul class="bot-nav__fourth_limiter_1">
+                        <li>Редизайн сайтов и Интернет-магазинов</li>
+                        <li>Разработка текстов для сайта (копирайтинг)</li>
+                        <li>Наполнение сайтов</li>
+                    </ul>
+                    <ul class="bot-nav__fourth_limiter_2">
+                        <li>Баннеры для сайтов</li>
+                        <li>Иконки и инфографика</li>
+                        <li>Комплексный Интернет-маркетинг</li>
+                    </ul>
+                    <ul class="bot-nav__fourth_limiter_3">
+                        <li>it-консалтинг</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bot-nav__fifth">
+                <div class="limiter">
+                    <ul class="bot-nav__fifth_limiter">
+                        <li>Some text</li>
+                        <li>Some text</li> 
+                        <li>Some text</li>
+                        <li>Some text</li>
+                        <li>Some text</li>
+                        <li>Some text</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="banner__arrow prev"></div>
+        <div class="banner__arrow next"></div>
+
+        <div class="banner">
+            <div class="banner__cont0">
+                <div class="banner__cont0_studio">
+                    Студия созданиия сайтов и мобильных приложений любой сложости с нуля
+                </div>
+                <div class="banner__cont0_ez">
+                    Мы сделаем ваш выбор проще
+                </div>
+            </div>
+
+            <div class="banner__cont1">
+                <canvas id="c"></canvas>
+            </div>
+
+            <div class="banner__cont2">
+                
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+</div>
+
+</body>
+</html>
