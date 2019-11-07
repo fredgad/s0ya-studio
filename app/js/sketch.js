@@ -12,7 +12,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(wWidth, wHeight);
+  let myCanvas = createCanvas(wWidth, wHeight);
+  myCanvas.parent('main-banner');
+  
   // image(img, 100, 100);
   background(255);
  

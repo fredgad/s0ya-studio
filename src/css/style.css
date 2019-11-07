@@ -118,9 +118,85 @@
   }
 }
 
+@-webkit-keyframes banCome {
+  0% {
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+  }
+}
+
+@keyframes banCome {
+  0% {
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+  }
+}
+
 #defaultCanvas0 {
   position: absolute;
   top: 0;
+  z-index: -3;
+}
+
+form input {
+  background: transparent;
+  color: #CE2664;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+form input:focus {
+  -webkit-box-shadow: 0 0 4px 1px #CE2664 inset;
+          box-shadow: 0 0 4px 1px #CE2664 inset;
+}
+
+form ::-webkit-input-placeholder {
+  /* Chrome */
+  color: #CE2664;
+  font-size: 14px;
+}
+
+form :-ms-input-placeholder {
+  /* IE 10+ */
+  color: #CE2664;
+  font-size: 14px;
+}
+
+form ::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #CE2664;
+  font-size: 14px;
+  opacity: 1;
+}
+
+form :-moz-placeholder {
+  /* Firefox 4 - 18 */
+  color: #CE2664;
+  font-size: 14px;
+  opacity: 1;
+}
+
+form .search-rot {
+  -webkit-transform-origin: 38% 38%;
+          transform-origin: 38% 38%;
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+  -webkit-transition: 0s;
+  transition: 0s;
+  cursor: pointer;
+}
+
+form .search__text:focus + .search__icon .search-rot, form .search__text:hover + .search__icon .search-rot {
+  -webkit-transform-origin: 38% 38%;
+          transform-origin: 38% 38%;
+  -webkit-transform: rotate(300000deg);
+          transform: rotate(300000deg);
+  -webkit-transition: 999s linear;
+  transition: 999s linear;
 }
 
 * {
@@ -141,6 +217,11 @@ a {
   text-decoration: none;
 }
 
+input, button {
+  border: none;
+  outline: none;
+}
+
 ul, li {
   list-style: none;
   padding: 0;
@@ -151,7 +232,6 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  overflow-x: hidden;
   height: auto;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -184,7 +264,7 @@ body {
 }
 
 header {
-  position: relative;
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -198,7 +278,7 @@ header {
   height: 70px;
   width: 100vw;
   background: rgba(0, 0, 0, 0.82);
-  z-index: 999;
+  z-index: 99;
 }
 
 header #top-nav {
@@ -224,16 +304,10 @@ header #top-nav {
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-header #top-nav:hover + #bot-nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 header #top-nav > div {
   position: relative;
   cursor: pointer;
-  width: 20%;
+  max-width: 20%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -247,11 +321,43 @@ header #top-nav > div {
 }
 
 header #top-nav .colored {
-  color: orange;
+  color: #CE2664;
+}
+
+header #top-nav:hover + #bot-nav {
+  max-height: 50vh;
+  min-height: 300px;
+}
+
+header #mid {
+  min-height: 30vh;
+  width: 100vw;
+  overflow: hidden;
+  background: transparent;
+}
+
+header #mid .logo img {
+  width: 120px;
+}
+
+header #mid .search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 37px;
+}
+
+header #mid .search .search__icon {
+  outline: none;
+  -webkit-transform: translate(-32px, 6px);
+          transform: translate(-32px, 6px);
+  font-size: 14px;
 }
 
 header #bot-nav {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -261,12 +367,13 @@ header #bot-nav {
   position: relative;
   background: rgba(0, 0, 0, 0.6);
   width: 500vw;
-  min-height: 50vh;
-  max-height: 50vh;
+  max-height: 0;
+  min-height: 0;
   font-size: 50px;
   -webkit-transition: .4s;
   transition: .4s;
   color: #fff;
+  overflow: hidden;
 }
 
 header #bot-nav > div {
@@ -284,7 +391,12 @@ header #bot-nav > div {
   height: 100%;
 }
 
-header #bot-nav > div ul {
+header #bot-nav > div .limiter {
+  width: 100%;
+  max-width: 1024px;
+}
+
+header #bot-nav > div .limiter ul {
   font-size: 20px;
   width: 45vw;
   height: 100%;
@@ -300,13 +412,13 @@ header #bot-nav > div ul {
           flex-direction: column;
 }
 
-header #bot-nav > div ul li {
+header #bot-nav > div .limiter ul li {
   cursor: pointer;
   height: 100%;
 }
 
-header #bot-nav > div ul li:hover {
-  color: orange;
+header #bot-nav > div .limiter ul li:hover {
+  color: #CE2664;
 }
 
 header #bot-nav .bot-nav__first {
@@ -318,15 +430,136 @@ header #bot-nav .bot-nav__first {
           justify-content: space-between;
 }
 
-header #bot-nav .bot-nav__first .bot-nav__first_work {
-  background: #eee;
+header #bot-nav .bot-nav__first .big-circle {
+  position: relative;
+  width: auto;
+  height: 100%;
   width: 30vw;
   height: 100%;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-perspective: 999px;
+          perspective: 999px;
+  border: 2px solid green;
+  padding-left: 70px;
 }
 
-header #bot-nav .bot-nav__first .bot-nav__first_work > div img {
+header #bot-nav .bot-nav__first .big-circle #circle-top, header #bot-nav .bot-nav__first .big-circle #circle-bot {
+  left: 0;
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  z-index: 9999;
+  -webkit-transform: translateZ(10px);
+          transform: translateZ(10px);
+}
+
+header #bot-nav .bot-nav__first .big-circle #circle-bot {
+  top: 50%;
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont {
+  position: relative;
+  top: 100px;
+  width: 11rem;
+  height: 10rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 50% -15.4rem;
+          transform-origin: 50% 50% -15.4rem;
+  -webkit-transition: .8s;
+  transition: .8s;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
+  -webkit-perspective: 9e99px;
+          perspective: 9e99px;
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont p {
+  position: absolute;
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont div {
+  background: #efefef;
+  position: absolute;
+  height: 10rem;
+  width: 20rem;
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 5rem;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  overflow: hidden;
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont div img {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   height: auto;
-  width: 200px;
+  width: 100%;
+  z-index: -1;
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .one {
+  -webkit-transform: translateY(-10rem) rotateX(36deg);
+          transform: translateY(-10rem) rotateX(36deg);
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .two {
+  -webkit-transform: translateY(-18.1rem) translateZ(-5.9rem) rotateX(72deg);
+          transform: translateY(-18.1rem) translateZ(-5.9rem) rotateX(72deg);
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .three {
+  -webkit-transform: translateZ(-15.4rem) translateY(-21.2rem) rotateX(108deg);
+          transform: translateZ(-15.4rem) translateY(-21.2rem) rotateX(108deg);
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .four {
+  -webkit-transform: translateZ(-24.9rem) translateY(-18.1rem) rotateX(144deg);
+          transform: translateZ(-24.9rem) translateY(-18.1rem) rotateX(144deg);
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .five {
+  -webkit-transform: translateZ(-30.8rem) translateY(-10rem) rotateX(180deg);
+          transform: translateZ(-30.8rem) translateY(-10rem) rotateX(180deg);
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .six {
+  -webkit-transform: translateZ(-30.8rem) rotateX(-144deg);
+          transform: translateZ(-30.8rem) rotateX(-144deg);
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .seven {
+  -webkit-transform: translateZ(-24.9rem) translateY(8.1rem) rotateX(-108deg);
+          transform: translateZ(-24.9rem) translateY(8.1rem) rotateX(-108deg);
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .eight {
+  -webkit-transform: translateZ(-15.4rem) translateY(11.2rem) rotateX(-72deg);
+          transform: translateZ(-15.4rem) translateY(11.2rem) rotateX(-72deg);
+}
+
+header #bot-nav .bot-nav__first .big-circle .big-circle__cont .nine {
+  -webkit-transform: translateZ(-5.9rem) translateY(8.1rem) rotateX(-36deg);
+          transform: translateZ(-5.9rem) translateY(8.1rem) rotateX(-36deg);
 }
 
 header #bot-nav .bot-nav__second {
@@ -359,9 +592,8 @@ header #bot-nav .bot-nav__second .bot-nav__second_body {
 }
 
 header #bot-nav:hover {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  max-height: 50vh;
+  min-height: 300px;
 }
 
 header #bot-nav.first {
@@ -429,7 +661,7 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
 }
 
 main .banner {
@@ -445,7 +677,7 @@ main .banner {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: calc(100vh - 70px);
+  height: 100vh;
 }
 
 main .banner .banner__cont0 {
@@ -516,16 +748,135 @@ main .banner .banner__cont1 {
   display: flex;
   height: 100%;
   width: 100vw;
-  background: #222;
   position: relative;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-main .banner .banner__cont1 canvas {
-  width: 100%;
-  height: 100vh;
-  display: block;
-  position: relative;
-  top: -70px;
+main .banner .banner__cont1 .banner__cont1_wrap {
+  width: 1000px;
+  height: 626px;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-perspective: 400px;
+          perspective: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box {
+  background: url("../images/banners/circles.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 25%;
+  height: 25%;
+  background-size: 400%;
+  -webkit-transition: .6s;
+  transition: .6s;
+  -webkit-transform: translateZ(-99999px);
+          transform: translateZ(-99999px);
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box:hover {
+  z-index: 99;
+  -webkit-box-shadow: 0 0 20px 10px orangered;
+          box-shadow: 0 0 20px 10px orangered;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box0 {
+  background-position: 0% 0%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box1 {
+  left: 25%;
+  background-position: 33.33333% 0%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box2 {
+  background-position: 66.66666% 0%;
+  left: 50%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box3 {
+  background-position: 100% 0%;
+  left: 75%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box4 {
+  background-position: 0% 33.33333%;
+  top: 25%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box5 {
+  background-position: 33.33333% 33.33333%;
+  top: 25%;
+  left: 25%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box6 {
+  background-position: 66.66666% 33.33333%;
+  top: 25%;
+  left: 50%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box7 {
+  background-position: 100% 33.33333%;
+  top: 25%;
+  left: 75%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box8 {
+  background-position: 0% 66.66666%;
+  top: 50%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box9 {
+  background-position: 33.33333% 66.66666%;
+  top: 50%;
+  left: 25%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box10 {
+  background-position: 66.66666% 66.66666%;
+  top: 50%;
+  left: 50%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box11 {
+  background-position: 100% 66.66666%;
+  top: 50%;
+  left: 75%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box12 {
+  background-position: 0% 100%;
+  top: 75%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box13 {
+  background-position: 33.33333% 100%;
+  top: 75%;
+  left: 25%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box14 {
+  background-position: 66.66666% 100%;
+  top: 75%;
+  left: 50%;
+}
+
+main .banner .banner__cont1 .banner__cont1_wrap .box15 {
+  background-position: 100% 100%;
+  top: 75%;
+  left: 75%;
 }
 
 main .banner .banner__cont2 {
@@ -533,9 +884,17 @@ main .banner .banner__cont2 {
   display: -ms-flexbox;
   display: flex;
   height: 100%;
-  background: green;
   width: 100vw;
+  background: #222;
   position: relative;
+}
+
+main .banner .banner__cont2 canvas {
+  width: 100%;
+  height: 100vh;
+  display: block;
+  position: relative;
+  top: -70px;
 }
 
 main .banner.ban0 {
@@ -550,14 +909,99 @@ main .banner.ban0 .banner__cont0 .banner__cont0_ez {
 }
 
 main .banner.ban0 .banner__cont0 .banner__cont0_studio {
-  -webkit-transition: .6s 1s;
-  transition: .6s 1s;
+  -webkit-transition: .6s ease-in;
+  transition: .6s ease-in;
   left: 17vw;
 }
 
 main .banner.ban1 {
   -webkit-transform: translate(0);
           transform: translate(0);
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box0 {
+  -webkit-animation: banCome .7s linear .7s 1;
+          animation: banCome .7s linear .7s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box1 {
+  -webkit-animation: banCome .7s linear 0s 1;
+          animation: banCome .7s linear 0s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box2 {
+  -webkit-animation: banCome .7s linear 1.4s 1;
+          animation: banCome .7s linear 1.4s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box3 {
+  -webkit-animation: banCome .7s linear .2s 1;
+          animation: banCome .7s linear .2s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box4 {
+  -webkit-animation: banCome .7s linear .5s 1;
+          animation: banCome .7s linear .5s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box5 {
+  -webkit-animation: banCome .7s linear 1.1s 1;
+          animation: banCome .7s linear 1.1s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box6 {
+  -webkit-animation: banCome .7s linear .1s 1;
+          animation: banCome .7s linear .1s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box7 {
+  -webkit-animation: banCome .7s linear .9s 1;
+          animation: banCome .7s linear .9s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box8 {
+  -webkit-animation: banCome .7s linear .4s 1;
+          animation: banCome .7s linear .4s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box9 {
+  -webkit-animation: banCome .7s linear 1.6s 1;
+          animation: banCome .7s linear 1.6s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box10 {
+  -webkit-animation: banCome .7s linear .3s 1;
+          animation: banCome .7s linear .3s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box11 {
+  -webkit-animation: banCome .7s linear 1.2s 1;
+          animation: banCome .7s linear 1.2s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box12 {
+  -webkit-animation: banCome .7s linear .2s 1;
+          animation: banCome .7s linear .2s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box13 {
+  -webkit-animation: banCome .7s linear .8s 1;
+          animation: banCome .7s linear .8s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box14 {
+  -webkit-animation: banCome .7s linear 1s 1;
+          animation: banCome .7s linear 1s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box15 {
+  -webkit-animation: banCome .7s linear .6s 1;
+          animation: banCome .7s linear .6s 1;
+}
+
+main .banner.ban1 .banner__cont1 .banner__cont1_wrap .box {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 main .banner.ban2 {
